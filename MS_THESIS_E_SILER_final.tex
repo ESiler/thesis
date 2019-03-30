@@ -1,0 +1,616 @@
+\documentclass[12pt]{article}
+
+%%pPREAMBLE (stuff before document)
+
+%pPACKAGES USED
+\usepackage{tocloft} %for formatting table of contents, list of figures, and list of tables. I need to double space between entries.
+\usepackage{amsmath}  %Does math formatting stuff
+\usepackage{graphicx} %To add figures
+\usepackage{setspace} %for double spacing document
+\usepackage[margin=1in]{geometry} %margins
+\usepackage{tocloft} %to add dots to table of contents
+\usepackage{booktabs} %nice looking table
+\usepackage{float} %makes figures stay put with option H
+\usepackage{longtable} %for long tables, uses longtable environment
+\usepackage{lscape} % for 'landscape' environment
+\usepackage[normalem]{ulem} %for strikethrough
+
+%oOTHER FORMATTING STUFF
+
+%makes section headers 12pt
+%cCenters my titles for the table of contents, list of tables, and list of figures.
+\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
+\renewcommand{\cftlottitlefont}{\hspace*{\fill}\Large\bfseries}
+\renewcommand{\cftafterlottitle}{\hspace*{\fill}}
+\renewcommand{\cftloftitlefont}{\hspace*{\fill}\Large\bfseries}
+\renewcommand{\cftafterloftitle}{\hspace*{\fill}}
+
+%Change "1" to "Figure 1:" in TOF or TOC
+%tOC
+\renewcommand{\cfttabpresnum}{Table }
+\renewcommand{\cfttabaftersnum}{:}
+
+\newlength{\mylen}
+\settowidth{\mylen}{\cfttabpresnum}
+\addtolength{\cfttabnumwidth}{\mylen}
+
+%tOF
+\renewcommand{\cftfigpresnum}{Figure }
+\renewcommand{\cftfigaftersnum}{:}
+
+\newlength{\mylenf}
+\settowidth{\mylenf}{\cftfigpresnum}
+\addtolength{\cftfignumwidth}{\mylenf}
+
+%eEND OF PREAMBLE, BEGINNING OF DOCUMENT
+\begin{document}
+	
+	%Custom title page
+	\begin{titlepage}
+		\begin{center}
+			\vspace*{0.84375in}
+			
+			
+			\textbf{\large{FREQUENCY DEPENDENT SELECTION AND FLUORESCENT NODULE PHENOTYPING IN THE LEGUME/RHIZOBIA SYMBIOSIS}}
+			
+			\vspace*{12pt}
+			
+			By
+			
+			\vspace{12pt}
+			
+			\textbf{Eleanor A. Siler}
+			
+			\vfill
+			
+			A THESIS\\
+			\vspace{12pt}
+			Submitted to\\
+			Michigan State University\\
+			in partial fulfillment of the requirements\\
+			for the degree of\\
+			\vspace{12pt}
+			Plant Biology -- Master of Science
+			
+			\vspace{12pt}
+			
+			
+			2018
+		\addtocontents{toc}{\protect\vspace{24pt}}
+		\end{center}
+	\end{titlepage}
+	%end of custom title page
+	\pagenumbering{gobble}
+	\newpage
+	\begin{center}	%aABSTRACT 
+	\section*{\large{ABSTRACT}}
+	FREQUENCY DEPENDENT SELECTION AND FLUORESCENT NODULE PHENOTYPING IN THE LEGUME/RHIZOBIA SYMBIOSIS
+	\begin{center}
+	By
+	\end{center}
+	Eleanor A. Siler
+	\end{center}
+	\vspace{-.35cm}
+	\begin{doublespace} 
+	The relationship between legumes and rhizobia is an important model mutualism for several reasons. It is essential to agriculture, it provides a crucial ecosystem service by fixing atmospheric nitrogen, and it provides a tractable system for examining questions about mutualism, evolution, and ecology \cite{Vance2002,Gruber2008}. This symbiosis remains generally mutualistic despite the fact that models predict that mutualistic rhizobia will eventually be out-competed and overwhelmed by parasitic rhizobial symbionts known as cheaters. Here I investigate one possible mechanism that could maintain the diversity of rhizobia strains: frequency-dependent selection. I also introduce a novel method of conducting rhizobia competition experiments that uses non-destructive macroscopic fluorescent imaging to identify rhizobial symbionts in root nodules. 
+	\end{doublespace}
+	\newpage
+
+	\pagenumbering{roman}
+	\setcounter{page}{3}
+	\section*{} %|DEDICATION
+	\begin{center}
+	\vfill
+	Dedicated to Grace Siler
+	\vfill
+	
+	\newpage
+	
+	%aACKNOWLEDGEMENTS
+	\section*{\large{ACKNOWLEDGEMENTS}}
+	\end{center}
+	\begin{doublespace}
+
+	\paragraph{}
+	I would like to thank everyone who have helped me and supported me during my time in graduate school. This includes (but is not limited to) my friends, my family, Lansing's Eastside neighborhood, my dog Kootenai, the members of the Friesen Lab, my committee, undergraduate assistants Joseph Tekieli, Lindsay Nault, Amanda Denney, and Emily McLachlan, my advisor Maren Friesen, my partner Nick DeMott, and the multitudes of plants and bacteria that have been involved in my experiments. Many thanks to Shawna Rowe, Maren Friesen, and Andrea Siler for helpful comments on the manuscript.
+	\end{doublespace}
+	
+	%tTABLE OF CONTENTS
+	\newpage
+	
+	\renewcommand{\contentsname}{\MakeUppercase{\large{Table of Contents}}} %capitalizes TABLE OF CONTENTS
+	\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} %add dots to table of contents
+	
+	\tableofcontents
+	
+	%lLIST OF TABLES
+	\newpage
+
+	\renewcommand{\listtablename}{\normalsize{\MakeUppercase{List Of Tables}}} %capitalizes LIST OF TABLES
+	\addcontentsline{toc}{section}{\listtablename} %Adds list of table to TOC
+	\setlength\cftbeforetabskip{\baselineskip} %Double space between entries
+	\listoftables
+	
+	%lLIST OF FIGURES	
+	\newpage	
+	
+	\renewcommand{\listfigurename}{\normalsize{\MakeUppercase{List Of Figures}}} %capitalizes LIST OF FIGURES
+	\addcontentsline{toc}{section}{\listfigurename}
+	\setlength\cftbeforefigskip{\baselineskip} %Double space between entries <3
+	\listoffigures
+	
+
+	
+%oOther Stuff
+		\newpage
+	\pagenumbering{arabic} %eg 1, 2, 3
+\begin{doublespace} %makes thesis double spaced (duh)
+	\graphicspath{ {/home/ellie/Documents/Figures/} } %tells latex where my figures are (ie which directory)
+	
+%bBEGINNING OF DOCUMENT	
+
+\section{Introduction}
+	\paragraph{} %Legume/rhizobia symbiosis: importance and background
+The relationship between legumes and rhizobia is an important model mutualism. This symbiosis provides one third of humanity's total dietary nitrogen and as much as eighty percent of dietary nitrogen in the tropics and subtropics \cite{Vance2002}. It also plays a vital role in the global nitrogen cycle \cite{Gruber2008}. 
+
+	\paragraph{The Problem of Mutualism}
+Mutually beneficial relationships between species are wide-spread and important \cite{Bronstein2015}. Mutualism was critical in the emergence of eukaryotic cells, land plants, lichens, digestion, pollination, and nitrogen-fixing symbioses \cite{Bronstein2015}. However, ecological and evolutionary theory predicts that mutualistic relationships will not be stably maintained through time \cite{May1973}. In theory, one partner in a non-obligate mutualism can improve its fitness by diverting energy to its own reproduction instead of helping its partner. Thus mutualisms are predicted to be vulnerable to ``cheaters'' that destabilize the relationship, destroying the mutualism and turning it into parasitism \cite{Axelrod1981}. Since partners using this ``cheating'' strategy would have higher fitness than those cooperating, the relationship would evolve into a non-mutualistic state due to a tragedy of the commons \cite{Hardin1968}. The problem of cheating in mutualisms is a fundamental issue in the study of these systems: 30 percent of papers on the evolution of mutualism pertain to cheating \cite{Jones2015}. 
+
+	\paragraph{} %% 2. (FIXED) Jen -- Improve logic flow in this paragraph. Sentence placement does not make sense
+Legumes and rhizobia, which form a non-obligate symbiotic mutualism, provide an excellent study system to understand cheating and the evolutionary maintenance of mutualisms. Rhizobia are soil-dwelling bacteria that can respond to legume-generated signals, infect roots, and occupy specialized plant-derived organs called nodules. Legumes produce nodules for the purpose of nitrogen fixation. Rhizobia in nodules fix nitrogen from the atmosphere, providing an essential nutrient to the plants, which in return provide the rhizobia with a specialized habitat and with energy from fixed carbon.
+	\paragraph{}
+The legume/rhizobia mutualism has several features that make cheating seem like both a possibility and a winning evolutionary strategy. First, rhizobia populations vary widely in the amount of benefit the provide to the plant. For example, some rhizobia strains double pea plant biomass relative to others, and different rhizobia strains can cause a more than an eight-fold difference in leguminous tree growth \cite{Laguerre2007,Turk1993}. Second, fixing atmospheric nitrogen is metabolically costly for rhizobia, which means that failing to fix nitrogen could be advantageous to cheats \cite{Stam1987}. Finally, legumes have a variety of potential partner rhizobia and associate with multiple strains simultaneously. Since multiple strains of rhizobia can associate with one legume, a rhizobial strain could “cheat” the mutualism by increasing its own reproductive success instead of fixing nitrogen for the plant. Rhizobia could potentially accomplish this by storing energy in the form of Poly-3-hydroxybutyrate (PHB) instead of fixing nitrogen \cite{Ratcliff2008}.
+	\paragraph{}
+Evolutionary and ecology theory predicts that ``cheating'' rhizobia populations should increase over evolutionary time, driving effective (nitrogen-fixing) rhizobial strains to extinction and destroying the mutualism \cite{West2002}. Since cheating phenotypes would have higher fitness and drive mutualistic phenotypes extinct, diversity would decrease. Other theory predicts that when mutualism is successful diversity is reduced due to positive frequency dependence \cite{Law1985, Doebeli2000,Kopp2006}. However, neither of these predictions are born out in this system. The legume/rhizobia mutualism has not been overtaken by cheaters: it has persisted for an estimated 60 million years \cite{Lavin2005}. Nor are rhizobia homogeneous: in addition to their aforementioned diversity in plant benefit, they have diverse physiology and biochemistry \cite{Zhang1991,Aserse2012}. This contrast between theoretical predictions and empirical results leads to the paradox of rhizobial diversity: How can rhizobia contain widespread diversity and still maintain their mutualistic relationship with legumes? 
+
+
+\paragraph{Mechanisms that Maintain Mutualism}
+ Mutualisms can be maintained through partner choice, variable partner phenotypes (partner sanctions and partner nurture), partner fidelity feedback, and frequency-dependent selection \cite{Simms2002}. 
+ \paragraph{\textit{Partner Choice}} Partner choice, in which legumes form relatively more nodules with more beneficial rhizobia, can give effective rhizobia strains an advantage over less effective rhizobia. Heath and Tiffin's study of natural legume and rhizobia populations and Gubry-Rangin's \textit{M. trucatula} split root experiment both show evidence of effective partner choice \cite{Heath2007,Gubry-Rangin2010}. However, effective partner choice is not universal \cite{Amarger1981}. Partner choice typically refers to mechanisms that act before nodules are formed.
+ \paragraph {\textit{Variable Partner Phenotype}}
+ Mutualism maintenance is aided when the mutualist varies the amount of benefits it provides in response to the quality of its partner. In legumes, this refers to plants providing more benefit to rhizobia that are good N fixers and less to rhizobia that are poor N fixers. Variable partner phenotypes refer to mechanisms that act after nodules have formed.
+ \paragraph {} 
+ \textit{Partner Sanctions}: 
+ Sanctions increase the fitness of effective (nitrogen-fixing) rhizobia strains by providing resources to effective strains and restricting the growth of ineffective (non-nitrogen-fixing) strains in nodules. Modeling shows that plant sanctions can stabilize a legume/rhizobia mutualism that would otherwise degrade \cite{West2002}. Plant sanctions have been observed in the form of the reduced size of ineffective soybean nodules and the lower fitness of the rhizobia inhabiting them \cite{Kiers2003,Singleton1983}. Legumes can also sanction rhizobia by terminating symbiotic relationships with ineffective rhizobia using induced nodule senescence \cite{Regus2017}. However, sanctions are not universal; one study did not find evidence of sanctions in natural \textit{Medicago} and \textit{Rhizobia} communities \cite{Heath2009}. 
+ \paragraph {}
+ \textit{Partner Nurture}: 
+ Traditionally, all differential treatment of nodules by legumes has been categorized under sanctions \cite{Kiers2003}. However, there are intuitive and mechanistic reasons to split this category. Sanctioning mechanisms typically refer to ways of reducing the rhizobial population, such as decreased oxygen supply from the host plant to the nodules decreasing the reproductive success of the rhizobia \cite{Kiers2003}.
+ %% 4.FIXED , such as peroxide\cite{} %SR -- oxygen deprivation better example.(Kiers 2003)
+ Mechanisms that would increase the population of beneficial rhizobia, for instance those that cause effective nodules to grow extra large, provide increased nutrients to effective nodules, or allow effective nodules to branch, do not fall under common definitions of the word sanctions. They also may rely upon different physiological and molecular mechanisms. I have found that it is normal for rhizobia populations in different nodules to vary by several orders of magnitude. Sometimes one nodule on a plant is twenty times larger than others or branches into five or ten finger-like projections. These mega-nodules could cause a large increase in the fitness of their rhizobia partners relative to more typically sized nodules.  Nurturing one mega-nodule to host one hundred or one thousand times more rhizobia than the others could have a similar evolutionary effect as aborting one hundred or one thousand ineffective nodules. One limitation to seeing the effect of extra resources invested in certain nodules is that legume/rhizobia studies are usually run for a much shorter time than the life cycle of the plant. This reduces opportunities to observe phenomena that are likely to take effect over a longer period of time, including the effects of providing extra resources to grow some nodules extra large. Therefore, nurture might has a large and under-appreciated effect on the ecological and evolutionary dynamics of this system.
+ \paragraph{\textit{Partner Fidelity Feedback}} Partner fidelity feedback maintains mutualism when the fitness of both partners is positively correlated as a result of repeated interactions \cite{Sachs2004}. This occurs in cases of vertically transmitted mutualists or symbioses that occur over a relatively long period of time. In this case helping a partner (e.g. fixing nitrogen) automatically helps the other partner because it accrues some of the benefits of a healthier partner (e.g. increased plant growth due to adequate nitrogen allows more carbon to flow to root nodules) \cite{Sachs2004}. This mechanism cannot fully explain the legume/rhizobia mutualism because rhizobia are horizontally transmitted and plants simultaneously associate with multiple partners \cite{Kiers2011}. 
+  %% 5.FIXED no citations  
+ \paragraph{\textit{Frequency-Dependent Selection}} Negative frequency-dependent selection is not necessarily thought of as a way to maintain mutualism, since it simply increases or maintains the overall diversity of populations. However, since it would encourage the coexistence of effective and ineffective rhizobia, it could help maintain the mutualism in situations where ineffective rhizobia are dominant. 
+	\paragraph{This Thesis} 
+In this thesis, I examine the evidence for frequency dependent selection in the legume/rhizobia symbiosis.  I then introduce a novel method of determining rhizobia types inside nodules using macroscopic fluorescence phenotyping. 
+	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%cCHAPTER TWO
+\newpage
+\section{Frequency-Dependent Nodulation in the \newline Legume/Rhizobia Mutualism} 
+\subsection{Background}
+\paragraph{}
+Understanding the evolutionary and ecological maintenance of biological diversity is a central problem in biology \cite{Hutchinson1961,Tilman2000}. 
+Theory delineates the conditions for diversity maintenance under antagonistic interactions \cite{Gause1934,Levene1953,Hardin1960,Chesson2000}. Antagonistic coevolution is predicted to drive rapid coevolution through the Red Queen mechanism \cite{Valen1976} creating and maintaining diversity via negative frequency-dependent selection \cite{Doebeli2000,Kopp2006}. Antagonistic coevolution can readily generate negative frequency-dependence across generations; examples include reciprocal shifts in \textit{Linum marginale} resistance alleles and \textit{Melampsora lini} virulence alleles \cite{Thrall2012} and the rapid increase of rare major histocompatibility complex (MHC) alleles in experimental stickleback populations \cite{Eizaguirre2012}. In contrast, models of mutualistic interactions predict diversity reduction due to positive frequency-dependent selection \cite{Law1985, Doebeli2000,Kopp2006}. This has been observed in plant mutualisms with arbuscular mycorrhizal fungi \cite{Mangan2010}. The model mutualism between legumes and rhizobia, in which soil bacteria colonize host roots and fix atmospheric nitrogen in root nodules, is crucial to agriculture and nitrogen cycling \cite{Vance2002,Gruber2008}. Contrary to theoretical expectations, rhizobia populations contain large amounts of genetic \cite{McInnes2004} and functional \cite{Thrall2000} diversity. While symbiont diversity has been proposed to arise through antagonistic coevolution driven by cheaters, evidence for this is weak in rhizobia and other systems \cite{Jones2015,Friesen2012}. These studies support a model of coordinated coevolution in mutualisms, further intensifying the paradox of rhizobial diversity. 
+\paragraph{}
+For symbiont diversity to be actively maintained, rhizobia strains must have a fitness advantage when rare that is lost when the strain becomes common \cite{Chesson2000}. Negative frequency-dependent selection allows a strain to invade a community when rare, preventing deterministic extinction and opposing diversity loss due to stochastic sampling \cite{Provorov2000}. Frequency dependence is quantified by measuring the fitness of two competing strains across a variety of starting ratios. In the simplest scenario, with two strains A and B that are equally competitive and without frequency dependence, the strains’ ratio in the inoculum $\frac{I_A}{I_B}$ equals the ratio of the strains’ nodule occupancy $\frac{N_A}{N_B}$. A log-log plot of the nodule versus inoculum ratios has a slope of 1. If one strain is more competitive by a factor $C$, then the log-ratio of the strains in nodules will be 
+\begin{align}
+log\left(\frac{N_A}{N_B}\right) &= log\left(\frac{I_A*C}{I_B}\right)\tag{1a}\\
+log\left(\frac{N_A}{N_B}\right) &= log\left(\frac{I_A}{I_B}\right) + c\tag{1b}
+\end{align}
+where $c = log(C)$. Thus, when two strains of differing competitiveness are inoculated at varying ratios and the resulting nodule ratio is plotted on a log-log scale, the data are linear with slope 1 and intercept c. Under this scenario, the more competitive strain will always out-compete the other strain, driving it to extinction (Fig. \ref{fig:theo}A).  Frequency-dependent selection is introduced by adding the frequency dependence coefficient $k$, such that 
+\begin{equation}
+log\left(\frac{N_A}{N_B}\right) = k*log\left(\frac{I_A}{I_B}\right) + c\tag{2}
+\end{equation}
+Equation 2 was introduced to measure relative rhizobia competitiveness (c) and is widely used in agronomic studies \cite{Amarger1982}. When $k\neq1$, strain competitiveness is frequency dependent. This has dramatic consequences for diversity, which can be illustrated by the difference equation that describes the strain ratio dynamics between iterations of plant growth: 
+\begin{equation}
+log\left(\frac{N_A(t+1)}{N_B(t+1)}\right)=k*log\left(\frac{N_A(t)}{N_B(t)}\right)+c\tag{3}
+\end{equation}
+which assumes for simplicity that the inoculum ratio in the next generation is the strain nodule ratio in the previous generation. Typically, a single rhizobium cell initiates each root nodule and multiplies to $10^5-10^8$ cells, making nodule occupancy an adequate proxy for rhizobia fitness \cite{Denison2000}. Equation 3 results in the equilibrium strain ratio 
+\begin{equation}
+Log\left(\frac{N_A}{N_B}\right) = \frac{c}{1 - k}.\tag{4}
+\end{equation} 
+This equilibrium is dynamically stable when $k < 1$ and unstable when $k > 1$.  When $k > 1$ the more common strain has an advantage, thwarting diversity and resulting in a monomorphic population (Fig. \ref{fig:theo}B). When $k < 1$, the rarer strain has an advantage, actively maintaining symbiont diversity (Fig. \ref{fig:theo}C). 
+
+%Frequency Dependent Nodulation Nodulation Theoretical Figure
+\begin{figure}[H] 
+	\includegraphics[width=\linewidth]{BN_theo.png}
+	\caption{Results from theoretical rhizobia competitions (row 1) and their effects on long-term population dynamics (row 2). Strain A is shown in blue, Strain B in red. Column 1 shows no frequency dependence, column 2 shows positive frequency dependence, and column 3 shows negative frequency dependence.
+	}
+	\label{fig:theo}
+\end{figure}
+\subsection{Methods}
+\paragraph{Study selection}                  
+We compiled all experiments that compared multiple inoculum ratios of competing rhizobia strains to the subsequent nodule occupancy ratios on the host plant. These studies were obtained by searching papers connected by citation to Amarger and Lobreau and Beattie et al \cite{Amarger1981},\cite{Beattie1989}, and by searching Web of Science for papers with ``*rhizobi* competitiveness'' in the title. Dr. Beattie kindly contributed raw data from her 1989 paper and PhD thesis.
+\paragraph{Data collection} 
+The ratios of strains in the inoculum and in nodules were extracted from data tables or from figures using WebPlotDigitizer or DataThief. Mixed nodules were included in the nodule count for both strains, following previous literature (e.g. \cite{Beattie1989}). In two cases, rhizosphere ratio (the ratio of strains surrounding the roots of the plant) was used instead of inoculum ratio. This should give a conservative estimate of negative frequency-dependent selection in those experiments because some frequency dependence may occur between inoculation and rhizosphere colonization. To ensure that clearly non-significant slopes were not included in our study while still including as much data as was reasonable, we excluded experiments in which the inoculum ratio and nodule ratio were not correlated at a significance of $\alpha=0.1$. 25 experiments from our initial data set of 135 experiments were excluded on these grounds. Our final data set includes 110 experiments reported from 30 publications. I recorded the following meta-data from each experiment: publication, year, legume genus and species, rhizobia strains used, nodule growth pattern (determinate or indeterminate), whether the strains were near-isogenic or genetically divergent, whether both strains fixed nitrogen, the marker type used to differentiate the strains, life history of the plant (annual or perennial), sterility of the growth system, inoculum density (if applicable), and number of points used to calculate the slope. I calculated the k-value (slope), competitiveness (intercept), standard error, and the statistical significance for each experiment. For two publications in which no raw data were available we collected slope data directly from the publication.
+\paragraph{Data analysis}
+All final calculations were made using un-weighted k-values determined with ordinary least squares regression. Alternative methods for calculating and weighting k-values included using the full set of 135 experiments, inverse-variance weighting, and calculated k-values using major axis regression. These gave nearly identical results and have therefore been omitted (Fig.\ref{fig:regmethods}). Statiscical analyses were performed using R version 3.0.2 “Frisbee sailing”, jags, and the packages rjags, R2Jags, and lme4 for all mixed models and data analysis \cite{RCoreteam2015}. A general linear mixed model with the k-value as the intercept and publication as a random effect was used to perfom this meta-analysis. This allows our findings to be generalized across the legume/rhizobia symbiosis. The influences of selected covariates (described above) were modeled as fixed effects in this mixed-model framework. Coefficients were assumed to be significant if their 95 percent confidence interval did not overlap with the null expectation (1 for k-values and 0 for covariate effects). Results from likelihood-based modeling methods (lme4) are shown in table \ref{BNtab1}.
+
+\subsection{Results}
+
+
+\begin{table}[]
+	\centering
+	
+	\label{BNtab1}
+		\caption{The effects of different factors on frequency dependent nodulation.  %% 10. (Fixed) STHE: I DON'T UNDERSTAND WHAT YOU MEAN IN THE CAPTION?
+		}
+	\begin{tabular}{@{}ccccccc@{}}
+		\toprule
+		\textbf{Model Covariate$^{1}$} & \textbf{Mean Effect} & \textbf{95\% CI}    & \textbf{AIC} & \textbf{BIC} & \textbf{Signif?} & \textbf{Effect} \\ \midrule
+		Near-Isogenic            & 0.279                & 0.15, 0.40    & -38.2        & -27.4        & Yes                   & Yes             \\
+		None                     & 0.56                 & 0.46, 0.66    & -27.8        & -17.7        & Yes                   & Yes             \\
+		$Log_{10}$(Inoculum Density)$^{2}$  & -0.06                & -0.10, -0.01  & NA           & NA           & Yes                   & Yes             \\
+		Sterile                  & 0.1                  & -0.05, -0.26  & -24.3        & -13.5        & No                    & ?    \\
+		Determinate              & 0.11                 & -0.08, 0.30   & -24.3        & -13.5        & No                    & ?    \\
+		Points Measured          & -0.01                & -0.04, 0.02   & -20          & -9.26        & No                    & ?    \\
+		Year                     & 0.01                 & 0.0, 0.01    & -18.3        & -7.55        & No                    & No              \\
+		Competitiveness          & 0                    & -0.019, 0.019 & -18.3        & -7.5         & No                    & No              \\
+		Marker Type              & NS      & NA                  & -11.7        & 9.87         & No                    & ?   \\
+		Plant Genus              & NS     & NA                  & -1.06        & 39.5         & No                    & ?   \\ \bottomrule
+	\end{tabular}
+	\begin{flushleft}
+	1. I used a mixed model to test the impact of various cofactors on frequency dependent selection, using publication as a random effect. \newline 
+	2. Not every study reported inoculum density. This model uses a reduced dataset and could not be used for model comparison (AIC and BIC).
+	\end{flushleft}
+
+	%% 9. (Fixed) SYHE: FOOTNOTE EXPLAINING TERMS AT BOTTOM
+\end{table}
+
+\paragraph{}
+I found evidence of substantial negative frequency-dependent selection: the frequency dependence coefficient k has a mean of 0.56 (95 percent confidence interval 0.46-0.66), far less than the null expectation of $k = 1$ (Fig. \ref{fig:kfig}A). This effect is large enough to have considerable ecological implications. For two equally competitive rhizobia strains, if either strain comprises 10 percent of the inoculum it will form approximately 30 percent of the nodules. When either strain comprises 1 percent of the inoculum it will form about 9 percent of the nodules (Fig. \ref{fig:kfig}B). If the two strains are not near-isogenic the effect is even larger -- a strain comprising 1 percent of the inoculum will occupy 15 percent of the nodules, whereas its equally competitive counterpart that forms 99 percent of the inoculum will occupy only 85 percent of nodules (Fig. \ref{fig:kfig}B). 
+
+Systematic experimental error, such as poor inoculum preparation that consistently over-represents rarer strains, is perhaps the simplest explanation for this phenomenon. However, given that 110 experiments in 30 publications across multiple labs -- and decades -- have found evidence of frequency dependent nodulation, systematic experimental error seems highly unlikely to consistently produce such large differences between stated inoculum density and actual nodule occupancy (Fig. \ref{fig:kfig}B). I also found no evidence of publication bias, perhaps because the experiments in my dataset are designed to find the competition coefficent, C, and determined the k value only incidentally (Fig. \ref{fig:funnel}). Hence, our data unequivocally demonstrate that rhizobia typically experience an advantage when rare during nodulation of a host legume.
+%K value multifigure
+\begin{figure}[h!]
+	\includegraphics[width=\linewidth]{BNkMultifig.pdf}
+	\caption{Frequency dependent nodulation in the legume/rhizobia symbiosis.
+		\newline A)  The distribution of k-values found in our dataset (gray) compared to the null hypothesis of no frequency dependence (red line).
+		\newline B) Relative over-representation of rhizobia in nodules at different inoculum frequencies based on our meta-analysis results. 
+		\newline C) Effect of strain relatedness on dependent nodulation. Dots represent the mean, black lines show 95 percent confidence intervals. Gray curves show the distributions of the k-values.
+		\newline D) Effect of inoculum density on frequency dependent nodulation. Gray lines represent 95 percent confidence interval. Based on the subset of experiments that report inoculum density (n=57 of 110 experiments).}
+	\label{fig:kfig}
+\end{figure}
+\pagebreak
+\paragraph{} Two covariates that affect the strength of frequency dependent nodulation were identified: strain relatedness (near-isogenic vs. divergent strains) and inoculum density (Fig. \ref{fig:kfig}C, Fig. \ref{fig:kfig}D, Table 1). Our finding that divergent rhizobia experience stronger pressure from frequency dependent nodulation supports the hypothesis that this phenomenon partially arises from ecological divergence between strains or strain-specific plant responses. Surprisingly, even near-isogenic rhizobia strains (e.g. those differing only by the addition of a genetic marker such as GUS) demonstrate frequency dependent nodulation (k = 0.73, 95 percent CI 0.62 to 0.83). It is unclear how the host plant or the environment could distinguish between strains that are so similar. I also found that as the inoculum density increases, frequency dependent nodulation becomes considerably stronger (Fig. \ref{fig:kfig}D). This is consistent with the hypothesis that rhizobia competition contributes to frequency dependent nodulation. Frequency dependence is unrelated to the relative competitiveness of the two strains (Fig \ref{fig:CvsK}). 
+%Fancy Phylogeny Figure
+\begin{figure}[h!]
+	\includegraphics[width=\linewidth]{BNlegphysmall.png}
+	\caption{Legume species exhibiting frequency dependent nodulation (red)
+	mapped onto the legume family phylogeny. Frequency dependent nodulation was detected in all legume species studied so far. Species are 1) \textit{Stylosanthes guianenses} 2) \textit{Medicago truncatula} 3) \textit{Medicago sativa} 4) \textit{Trifulium repens} 5) \textit{Trifolium pratense} 6) \textit{Trifolium subterraneum} 7) \textit{Vicia faba} 8) \textit{Pisum sativum} 9) \textit{Lutus pedunculatus} 10) \textit{Cyamopsis tetragonoloba} 11) \textit{Phaseolus vulgaris} 12) \textit{Macroptillium atropurpureum} 13) \textit{Vigna unguiculata} 14) \textit{Glycine max} 15) \textit{Acacia senegal} and 16) \textit{Prosopsis sp.}}
+	\label{fig:phylogeny}
+\end{figure}
+\paragraph{}
+Frequency dependent nodulation runs rampant throughout the legume family, including a large variety of Papilionoid taxa and even two Mimosoid taxa (Fig. \ref{fig:phylogeny}). All 16 legume species and all 12 legume genera investigated thus far show evidence of frequency dependent nodulation (Fig. \ref{fig:phylogeny}, Fig. \ref{fig:KbyGenus}). Of the publications in our analysis, 93 percent found evidence supporting frequency dependent nodulation (Fig. \ref{fig:KbyPub}). 
+
+\subsection{Discussion}
+%paragraph %Summarizes results and links to furthur discussion
+We were surprised to find that, contrary to expectations, rhizobia competing for nodule occupancy are subject to negative frequency dependence. The effects of this frequency-dependent nodulation are large, likely having substantial fitness impacts on rhizobia, and wide-ranging, effecting legumes spanning across most of their phylogenetic tree. Although our meta-analysis shows that the literature has contained evidence of this phenomenon for decades, its importance has not previously been noted. It is currently unknown how frequency-dependent nodulation occurs and why it is so prevalent in the legume/rhizobia mutualism. Here, we discuss some possible answers to those questions and the larger significance of frequency-dependent nodulation.
+
+\paragraph{}%mechanistic %lol "stems", "underlies", get it?
+It is difficult to explain how frequency-dependent nodulation works mechanistically for two reasons. First, if frequency-dependent nodulation stems from the host plant then we have no clear idea how the host plant could identify and differentially regulate different types of rhizobia, nor how it could integrate that information even if it could somehow acquire it. Second, if ecological processes affecting rhizobia competition in the soil underlie frequency-dependent nodulation, we do not understand how even near-isogenic strains could have this type of competition since they have the same ecological niche. Since a variety of near-isogenic strains do exhibit frequency dependence, it seems unlikely that the rhizobia are differentiated on the basis of a single genetic locus: at least some of the near-isogenic strains would be identical to one another at any point in the genome. However one newer study did find an absence of frequency dependence between two near-isogenic strains \cite{Westhoek2017}. It differed from the other studies in our meta-analysis by using newer methods to mark the rhizobia that gave the strains less chance to accumulate random mutations, so it seems that some level of genetic differences between strains may be important for frequency-dependent nodulation to occur \cite{Westhoek2017}. 
+
+Frequency dependent nodulation occurs within a single host generation, not across generations, and thus could be caused by either (i) ecological processes favoring rare strains during rhizosphere colonization or (ii) strain-dependent regulation of nodulation by the host plant. Frequency dependent nodulation mediated by the plant would require legumes to acquire, integrate, and respond to information identifying their potential rhizobial symbionts.We speculate that frequency dependent nodulation could occur through bacterial surface molecules or diffusible signals, such as small RNAs or effector proteins, that are sensed by the plant and acted upon in a systemic manner. 
+
+\paragraph{}%eco/evo
+The prevalence of frequency dependent nodulation suggests that it confers a broad evolutionary advantage or results from an evolutionarily conserved mechanism. If either legumes or rhizobia experienced selection to limit the number of nodules formed in a strain-dependent manner, this would favor the evolution of frequency dependent nodulation. Rhizobia populations in the rhizosphere are several orders of magnitude greater than the number of rhizobia that ultimately form nodules \cite{Denison2000}; it may thus be advantageous for strains to limit their infection of the root to avoid overwhelming their host plant. However, an even larger rhizobial benefit could be had by limiting the infection of unrelated competing strains. From the plant perspective, limiting nodulation of specific strains rather than simply limiting the total number of nodules would not necessarily yield an advantage. However, plants could benefit from having diverse symbionts in two ways. First, associating with multiple strains could provide synergistic benefits if the strains are complementary. Data do not generally support to this proposition: some evidence shows antagonism between strains, causing plants inoculated with two strains to perform worse than singly-inoculated plants \cite{Heath2007},\cite{Barrett2015}. Second, plants could favor rare rhizobia as a form of “bet-hedging”-- symbiont diversity could provide insurance against being overtaken by cheaters or otherwise non-beneficial strains in situations when signals do not accurately predict rhizobia partner quality. Alternatively, bet-hedging could be favored when partner quality depends on an unpredictable environmental context, for example when one strain performs well in a wet year and another performs well in a drought. The benefit of rhizobia to legume is context dependent in some cases, for example when nitrogen levels \cite{Heath2007} or specialized metabolites from neighboring plants \cite{Ehlers2012} vary. Finally, frequency dependent nodulation could be a pleiotropic effect of some other unknown plant regulatory mechanism that is strongly selected for, such as one controlling pathogen infections.
+
+\paragraph{} %fds vs. other explainations of diversity
+We emphasize that frequency dependent nodulation does not necessarily impose selection pressure to maintain rhizobia cooperation. In fact, it provides one potential explanation for the prevalence of ineffective strains in nature. Many experiments in our dataset even demonstrate that frequency dependent nodulation favors ineffective rhizobia over effective ones when the ineffective strains became rare \cite{Amarger1982}\cite{Bloem2001}\cite{Robleto1998}. 
+Thus, frequency dependent nodulation is distinct from host sanctions that promote cooperative symbiont behavior and from one-directional partner choice of more effective symbionts \cite{Kiers2003}. 
+
+\subsection{Conclusion}
+Balancing nodulation is a ubiquitous phenomenon across legumes, suggesting there is an evolutionary advantage for plants to increase the diversity of their microbial mutualists. While the underlying mechanism is currently unknown, understanding how plants maintain symbiont diversity will be crucial to managing microbial biodiversity for optimal agricultural and planetary health.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+	\newpage
+\section{Fluorescent Nodule Occupancy Phenotyping}
+%2.1 -- need to have 1-2 P overview of existing methods, how they work, citations, what they found, then final P about how your method is so much better and giving a roadmap for the rest of the ms 
+\subsection{Background}
+\paragraph{} 
+Understanding competition between rhizobia strains is essential to learning how the \linebreak 
+legume/rhizobia mutualism is maintained. In addition to their mutualism with plants and competition for nodule occupancy, rhizobia strains indirectly cooperate with one another to fix enough nitrogen that their shared host plant can provide them with fixed carbon. The fitness of rhizobia and legumes appears to be generally aligned in single-strain interactions \cite{Friesen2012}, although fitness conflict has been found \cite{Porter2014}. However, rhizobia may be able to cheat each other by exploiting the resource production of more effective strains, and this can be detected only with competition studies \cite{Ratcliff2009}. As a result, several prominent researchers have called for more rhizobia studies involving two or more strains, emphasizing their necessity to answer ecological and evolutionary questions about cheating and partner choice \cite{Kiers2013,Friesen2012}. 
+
+\paragraph{Nodule Occupancy Phenotyping Strategies} 
+Rhizobia competition studies have been performed for many years, but they are quite laborious and therefore limited in scale. Although a multitude of single-strain rhizobia studies have been published, two- or multi- strain competition studies remain comparatively rare \cite{Friesen2012}. In my research I found that the difficulty of determining which rhizobia strains inhabit which nodules to be major barrier to performing rhizobia competition studies. Processing a large plant with over 50 nodules typically takes me and an assistant 30 minutes of labor, mostly in sterilizing and picking the nodules. This constrains the number of plants that can be used in an experiment. This may explain the large number of theoretical and review papers on this subject relative to the number of empirical experiments. However, the symbiosis does have some features that make it appealing for rapid phenotyping. Although rhizobia are microscopic, nodules are typically only occupied by a clones of a single strain, having been initially infected by only one or a few cells \cite{Denison2000}. This has the advantage of giving a macroscopic phenotype to a microscopic initial phenomenon.
+
+\paragraph{} 
+Early experiments were performed using antisera extracted from rabbits (\cite{Weaver1974,Johnson1965}) or visual identification \cite{Sindhu2003}.  PCR-based identification methods have also been used \cite{Simms2006}. Differential antibiotic resistance has been used successfully for some time (e.g.\cite{Beattie1989,Patankar2009}).These nodule phenotyping methods all involve picking, surface-sterilizing and crushing each nodule, culturing the rhizobia within, and then identifying colonies by the chosen methods. One group used a LacZ/Gus staining method to phenotype nodules, but it is more laborious and destructive than simple imaging \cite{Sessitsch1996}.  One of the more prolific collectors of rhizobia competition data created a nodule multi-crusher to expedite nodule processing \cite{Beattie1989}. The nodule multi-crusher is a faster alternative to crushing each nodule individually with a sterile plastic pestle. It allows the researcher to crush 24 nodules simultaneously in a 96-well format. The nodule multi-crusher is a hand tool made from 24 metal rods spaced to align with a 96-well plate that are welded to a stainless steel handle (Fig. \ref{fig:multicrusher}). It can be easily sterilized by flaming in ethanol. I based this multi-crusher off of Dr. Beattie's original design \cite{Beattie1989}. While it does increase nodule throughput, sterilizing and picking each nodule still limits the scale and number of these experiments.
+		%Medicago Truncatula Growth System Fig
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=8cm]{Multicrusher2.jpg}
+			\caption{Nodule Multi-Crusher}
+			\label{fig:multicrusher}
+		\end{figure}
+
+
+\begin{table}[]
+	\centering
+	\label{pheno}
+	\caption{A comparison of nodule occupancy phenotyping methods.} %why is this centered?	
+	\begin{tabular}{@{}lllll@{}}
+		\toprule
+		Method                          & Publication & Speed & Accuracy & Notes \\ \midrule
+		Serotyping                        & Johnson et al 1965  & Slow    & Good &  Requires live rabbits \\ 
+		Gus/Lac Staining                 & Sessitsch et al 1996            & Medium  & Good  &   Multistep process\\
+		Visual ID              & Sindhu 1993            & Fast    & Variable&   Accurate for few strains\\
+		Antibiotics           & Amarger 1981 & Slow    & Good  &   Pick all nodules\\
+		PCR profiles                       & Simms et al 2006 & Slow    & Good  &   Pick all nodules\\
+		Fluorescence               & This thesis          & Fast    & Good  &  GFP/YFP expression \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+	\paragraph{Fluorescent Nodule Phenotyping}
+The strategy I developed uses fluorescent proteins expressed by rhizobia to illuminate whole nodules in a fluorescent imaging device. Advantages of this strategy include the ability to phenotype whole roots, the ease of phenotyping, relative non-destructiveness, and rapid processing time per plant (twelve plants can be harvested and imaged in under two hours). Potential challenges with this strategy include the difficulty of visualizing fluorescent signals through layers of plant tissue, bright and variable auto-fluorescence in the blue range from control nodules, variation in nodule size and fluorescence expression levels, and maintaining plasmid stability without antibiotics.
+\paragraph{}%"Why this method is better and roadmap for the rest of the manuscript"
+My method utilizes fluorescent protein expression to facilitate rapid nodule phenotyping for larger-scale partner choice studies. Fluorescent proteins like Green Fluorescent Protein (GFP) and Yellow Fluorescent Protein (YFP) have revolutionized microscopic phenotyping \cite{VanRoessel2002}; Osamu Shimomura, Martin Chalfie, and Roger Y. Tsien were awarded the 2008 Nobel prize in chemistry for its discovery and development. However, fluorescent proteins have not been used to assess root nodule occupancy on a macroscopic scale. Rhizobia expressing fluorescent proteins have been used to visualize infection threads \cite{Stuurman2000} but there have been no published attempts to use them to phenotype whole nodules. My macroscopic fluorescence phenotyping system allows researchers to identify GFP- and YFP-expressing rhizobia in live nodules and partially automate their identification with image analysis scripts.
+
+
+\subsection{Methods} 
+
+\subsubsection{Overview}
+To develop my phenotyping method, I grew \textit{Medicago truncatula} inoculated with fluorescent \textit{Ensifer meliloti} 1021 and tested the resulting nodules' fluorescence phenotype and plasmid stability. In my first experiment I test the feasibility of fluorescence phenotyping by visualizing nodules with fluorescence microscopy and with an unmodified fluorescent gel imager. In my second experiment I refine my method using a gel imager with a special-ordered optical filter for enhanced accuracy. In my third experiment I formally asses the stability of the plasmid used to confer fluorescence to the rhizobia. 
+
+\subsubsection{General Methods}
+\paragraph{Plant Growth}
+		%Medicago Truncatula Growth System Fig
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=8cm]{Sterile_medicago_growth_system.png}
+			\caption{Sterile \textit{Medicago truncatula} growth habitats.}
+			\label{fig:growthsystem}
+		\end{figure}
+\textit{Medicago truncatula} seeds were vernalized at 4 degrees C, removed from pods, and scarified by either submerging them in sulfuric acid for about 30 minutes or by nicking the seed coats with razor blades. Seeds were sterilized in the biosafety cabinet in full-strength bleach and one drop of TWEEN-20 for three minutes. They were then soaked in sterile water for several hours to imbibe. Water was changed at least once. Seeds were germinated in sterile petri plates overnight. Plant habitats consisted of 25x200 mm tall tubes filled to 160 mm with vermiculite and fertilized and watered with 25 ml of sterile nitrogen-free Fahraeus solution (Fig. \ref{fig:growthsystem}). They were capped with 30 mm plastic lids. All materials were autoclaved; vermiculite was autoclaved three times on three separate days. Germinated seedlings were selected for planting if they had undamaged radicals that did not curl or fold back on themselves. Chosen seedlings were transplanted into the tube habitats, then watered with 1 mL sterile water to aid establishment. Tubes were sealed with micropore tape to ensure sterility. Plants were then grown in a growth room under fluorescent light with a 16/8 day/night regimen. One to two weeks after planting, seedlings were inoculated with approximately $10^6$ colony forming units (cfu) of rhizobia or with $1/2$X phosphate buffered saline.
+
+\paragraph{Harvesting}
+%harvest, cleaning, prep, microscopy, chemi/versidoc
+After 4-8 weeks of growth, plants were harvested and imaged. Plants were shaken out of their growth habitats. Loose vermiculite was removed from the roots via shaking and root systems were rinsed and gently hand-cleaned in deionized water. Roots were stored in damp paper towels on ice or at 4 degrees prior to imaging.
+
+\paragraph{Fluorescence Microscopy} 
+Fluorescent nodules were examined and photographed with an Olympus IX71 fluorescence microscope. Nodules were from \textit{Medicago truncatula} plants inoculated with \textit{Ensifer meliloti} strain 1021. All left-hand pictures in Fig. \ref{fig:microscopy} were taken using a CY3 filter and all right-hand pictures were taken using a YFP filter. Images are of nodules containing \textit{E. meliloti} strain 1021 expressing mCherry, YFP, GFP, and no fluorochromes. Three representative nodules are shown from each treatment. Nodules with fluorescent proteins show bright fluorescence in at least one filter compared to the control, which shows the autofluorescence of the nodules. Nodules occupied by rhizobia expressing mCherry, YFP, and GFP have different fluorescence patterns and can easily  be differentiated from one another. All pictures were taken at a magnification  of 100x and an exposure time of 1/20 second. Nodules were plucked with forceps and placed on dry slides without a coverslip. 
+
+\paragraph{Macroscopic Fluorescence Imaging}
+Imaging of the whole root systems was done using a Biorad "Universal Hood III" VersaDoc MP for experiment 1 or the Biorad "Universal Hood III" ChemiDoc gel imager for subsequent experiments. GFP images were taken using blue LED light with a 530 nm optical filter, YFP images using green LED light with a 605 nm filter, and general root system images with white light and a 605 nm filter, using an exposure time of 0.1 seconds and a gain of 1.4. 
+
+\paragraph{Rhizobia Isolation from Nodules}
+To assess the stability of the plasmid containing the fluorescent gene in experiment three, rhizobia were isolated from nodules to verify plasmid persistence. After harvest, each root system was placed in a 4-6" ziplock bag. Roots were bleached for 3 minutes in a 30 percent bleach solution in the sterile biosafety cabinet. Nodules were plucked with flame-sterilized forceps and placed into wells of a 96-well plate containing 170 uL each 1/2X phosphate buffered solution. Nodules were then crushed with a custom-designed "multi-crusher". They were grow on TY (tryptone yeast) agar plates under 10 ug/mL tetracyline (Tet) selection. 
+
+\paragraph{Data Analysis} 
+I used the FIJI distribution of ImageJ for image analysis \cite{FIJI}. I wrote one macro to automatically detect and threshold out nodules from roots and debris, and a second to measure the size and fluorescence from each fluorescence filter for each root nodule (Appendix A). Automatic nodule detection was validated by hand measurement. With smaller to medium amounts of plants hand-separating nodule clusters in ImageJ was worthwhile to increase nodule detection accuracy. The mean, minimum, median, and maximum pixel value for the YFP, GFP, and dual filter images of each nodule were recorded.
+
+\paragraph{Generation of Fluorescent Rhizobia} 
+Fluorescent rhizobia were generated using tri-parental mating. The pHC60:GFP and pHC60:YFP plasmids were transfered to \textit{E. coli} using electroporation. These textit{E. coli} were used the donor strain, which were mixed with a helper strain and receiving strain for mating. After incubating on thick LB plates for 24 hours at 30 degrees, the fluorescent rhizobia were isolated by repeated streaking onto selective media. The fluorescent versions of \textit{E. meliloti} 1021 were generated by the Walker lab who generously shared them. 
+
+\paragraph{Assessment of Plasmid Stability}
+Plants were grown, inoculated with several different strains of rhizobia, and harvested as per the above methods. Rhizobia were isolated from nodules. Rhizobia from 46 to 60 nodules per treatment and 9-10 plants per treatment were plated on antibiotic selective and non-selective media. Then the growth of the isolate from each nodule on each plate type was assessed. 
+
+\subsubsection{Experiments}
+\paragraph{Experiment 1: Initial fluorescence testing} 
+%% 29. EACH EXPERIMENT SHOULD BE DISCRIBED FIRST WITH WHY YOU DID THE EXPEREMENT. TRY STARTING SENTENCES WITH "TO DO X, WE DID Y". 
+To generate nodules, plants were grown and harvested in accordance with the methods above. Plants were inoculated with \textit{E. meliloti} 1021 expressing GFP, YFP, mCherry, or no fluorescent protein. There were 10 plants per treatment group. Nodules were harvested and imaged using fluorescence microscopy as described above. Several plants were imaged on the VersaDoc gel imager as a pilot test.
+		%Fluorescence scatter plot 
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=10cm]{../../Figures/FluorNodScatterExp2.png}
+		\caption{Fluorescence profiles of \textit{M. truncatula} A17 root nodules inoculated with \textit{E. meliloti} 1021. Plants were imaged with the ChemiDoc protocol and fluorescence values were determined using the FIJI distribution of ImageJ.}
+		\label{fig:scatter}
+		\end{figure}
+		
+	\paragraph{Experiment 2: Testing improved fluorescence imaging}
+This experiment was performed largely with the same methods as experiment 1 but with the following exceptions: A Bio-Rad ChemiDoc MP imager was used to image root systems, and I used 505 +/- 5 nm bandpass filter manufactured by Omega Optical, Inc. in Brattleboro, Vermont that I had optimized to capture GFP fluorescence. 
+	\paragraph{} %analysis
+Fluorescence data was analyzed in R. A straightforward analytical approach proved most effective in determining nodule identity: nodules with higher GFP pixel values than YFP are almost always GFP, nodule with higher YFP pixel values than GFP values are YFP, and unmarked control nodules have similar GFP and YFP fluorescence values. I used principle component analysis to achieve maximum separation of fluorochromes, but this did not improve the results (Figs. \ref{fig:PCA1} and \ref{fig:PCA2}). Therefore, the simpler \textit{maximum YFP fluorescence - maximum GFP fluorescence} formula was used to identify nodule occupants. 
+	\paragraph{Experiment 3: Assessing plasmid stability}
+Plants were grown in accordance with Plant Growth methods. They were inoculated with \textit{E. meliloti} 1021:GFP, \textit{E. meliloti} 1021:YFP, \textit{E. meliloti} 1021, \textit{E. medicae} PEA\_014\_4\_YFP and \textit{E. medicae} RTM\_254\_2\_GFP, and 1/2x PBS for the negative control. They were harvested and imaged following protocols above. There were 10 plants in each treatment group. Nodules were isolated onto TY and TY/tetracycline plates to assess plasmid stability. Each nodule isolate was counted on both TY and TY/tetracycline plates. Nodule isolates that grew on both media were scored as stable because tetracycline resistance is expressed by the plasmid with the fluorescence gene. Nodule isolates that grew on TY but not on TY/tetracycline were scored as plasmid loss. 
+
+
+\subsection{Results}
+	\paragraph{Experiment 1: Initial fluorescence testing}
+Experiment 1 showed substantial differences among nodules infected with GFP, YFP, mCherry, and non-fluorescent rhizobia. Clear visual differences between the nodules were apparent with both fluorescence microscopy and the macroscopic VersaDoc imager. However, due to large and variable autofluorescence in the blue range, dim fluorescence signal of some nodules, and suboptimal optical filters, only 75-80 percent of nodules could be accurately phenotyped.
+
+Attempts to improve accuracy by bleaching roots to reduce auto-fluorescence showed negligible effects on nodule fluorescence. Attempts to clone brighter fluorochromes failed due to problems extracting enough intact pHC60 plasmid DNA. 
+			%Glowing Nodule Microscopy Art
+		\begin{figure}[h!] 
+			\centering
+			\includegraphics[width=8cm]{GlowNodsABCD.png}
+			\caption{Fluorescence microscopy images of \textit{Medicago  truncatula} A17 nodules infected with fluorescent rhizobia. Left-hand pictures in A-D were taken using a CY3 filter; right-hand pictures were taking using a YFP filter. Nodules contain \textit{E. meliloti} strain 1021 expressing A. mCherry B. YFP C. GFP and D. No fluorochrome. A-C show bright fluorescence in at least one filter compared to D, which shows the autofluorescence of the nodules. Nodules occupied by rhizobia expressing different fluorochromes have easily distinguished fluorescence patterns (100x magnification).}
+			\label{fig:microscopy}
+		\end{figure}
+	\paragraph{Experiment 2: Testing improved fluorescence imaging}
+In Experiment 2, I phenotyped 212 nodules. These could be phenotyped as GFP or YFP (and not negative control) with 98 percent accuracy (Fig. \ref{fig:scatter}). There was no overlap between GFP and YFP-containing nodules, and only minimal overlap between GFP nodules and the negative control nodules. GFP nodules had higher maximum GFP brightness than maximum YFP brightness; for YFP nodules this was reversed. The fluorescence profile (GFP max pixel value - YFP max pixel values) of the GFP, YFP, and control nodules were all different from one another ($p<.0001$ in all cases). The mean fluorescence profiles of GFP and YFP nodules differed by 22796.676 pixel units (95 percent CI 19574.44 to 26018.912).
+
+	\paragraph{Experiment 3: Assessing plasmid stability} %% 34. MOVE SOME OF THIS TO METHODS
+ Although rhizobia could not be recovered from all nodules, rhizobia that grew on non-selective media also grew on tetracycline media, indicating no plasmid loss (Fig. \ref{fig:plasmidstability}). 
+
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=15cm]{plasmidstability.png}
+		\caption{Stability of fluorescence marker plasmid with GFP and YFP.}
+		\label{fig:plasmidstability}
+	\end{figure}
+
+
+\subsection{Discussion}
+
+\begin{table}[]
+	\centering
+	\caption{Plasmid stability of PHC60:GFP and PHC60:YFP in 5-week-old \textit{Medicago truncatula} A17 nodules grown without antibiotic selection.}
+	\label{stability}
+	\begin{tabular}{@{}ccccc@{}}
+		\toprule
+		Strain           & Nodules    & Recovered    & Recovered        & Plasmid  \\ 
+		                 & Crushed    & (TY)         & (TY/Tet)         & Stability \\ \midrule
+		Em1021 YFP       & 60         & 52           & 51               & 98\%   \\
+		Em1021 GFP       & 46         & 31           & 31               & 100\%  \\
+		Em1021           & 60         & 56           & 0                & NA     \\
+		PEA\_014\_4\_YFP & 52         & 51           & 51               & 100\%  \\
+		RTM\_254\_2\_GFP & 57         & 55           & 55               & 100\% 
+	\end{tabular}
+
+\end{table}
+	\paragraph{} 
+Fluorescence proteins do allow the successful determination of nodule occupant identity in \textit{Medicago truncatula}. They facilitate the successful differentiation of both wild \textit{E. medicae} strains and the model strain \textit{E. meliloti} 1021. 
+	\paragraph{Caveats and Experimental Design Considerations}
+There are several considerations a researcher must account for when designing a successful fluorescent competition experiment. First, root nodules are highly autofluorescent in the blue light range, enough so that it is possible to threshold out nodules with no fluorescent rhizobia. Thus, optical filters using bluish to blue-green light should be avoided. For that and other reasons, appropriate fluorescent nodule controls are essential. Non-fluorescent controls of each strain used allow the researcher to determine the strength of the GFP or YFP signal. Second, nodule fluorescent protein brightness seems to be affected by plant condition and by the other strains used in the experiment. For example, when growing plants were accidentally left on the benchtop over the weekend and thus deprived of light, their nodule fluoresced much more dimly than usual, suggesting that the stressful conditions may have reduce the concentration of fluorescent proteins in the nodules. Additionally, rhizobia co-inoculated with a one strain that was much more effective than the other (e.g. Em1021 with \textit{E.medicae} WSM 419 or Em1021:nifD with Em1021), the less-effective strain seemed to fluoresce very dimly, perhaps because legumes provide less nutrition to these nodules when better alternatives are available. Future research may allow researchers to garner information about nodule nutrition using fluorescence phenotyping. However, a researcher performing competition experiments must consider that singly-inoculated controls may not provide accurate data on the fluorescence profile of those same strains in competition with one another. Finally, generation of new fluorescent strains takes about six weeks, which should be accounted for in the experimental timeline. 
+	\paragraph{Scope and Scalability of Fluorescent Nodule Phenotyping}
+Fluorescent nodule phenotyping has been tested with the plant \textit{Medicago truncatula} A17 and with strains \textit{Ensifer meliloti} 1021, \textit{E. medicae} WSM, and field-collected strains \textit{E. medicae} $PEA-014-4$ and $RTM-254-2$. For other legume and rhizobia types results may be different. A fluorescence phenotyping trial run is essential before performing large experiments. 
+	\subsection{Conclusion} 
+
+%% 45. Expand! (according to Shawna)
+
+The development of fluorescent nodule phenotyping has both experimental and practical applications. The ability of easily asses the results of rhizobia competition had a clear agricultural application in the testing and development of new inocula. It will allow those developing rhizobia for inoculation to test the competitiveness of their products before release, potentially leading to better outcome for agriculture including higher yields, less need for fertilizer. Fluorescent nodule phenotyping can also facilitate a wide variety of experiments that will help us better understand the legume/rhizobia relationship. Some examples include:
+\begin{itemize}
+\item[1)] To test the effects of spatial structure on rhizobia competition and legume choice. My preliminary research does show that spatial structure is easy to maintain for rhizobia population in the soil. This method could allow us to determine whether that spatial structure can enable plant to form more nodules with more-beneficial rhizobia. 
+\item[2)] To test the impacts of coevolution on plant choice. The method could be used for plant choice experiments testing whether plants are better able to choose more beneficial rhizobia when they have coevolved with those strains. 
+\item[3)] To test whether plant choice differs in invasive legume genotypes compared to native genotypes. 
+\item[4)] To test the effects of different environmental conditions on rhizobia competition. 
+\item[5)] To help elucidate the mechanism behind frequency-dependent nodulation. It will make the multiple rhizobia competition experiments needed to assess frequency dependent nodulation in a given situation much more efficient.
+\end{itemize}
+Fluorescent nodule phenotyping is an accurate and high-throughput method of nodule occupant identification that improves upon previous methods. It will facilitate future research on rhizobia competition and on how competing strains of rhizobia interact with plants. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section*{} %Cover Sheet for Appendices
+\begin{center}
+	\vfill
+	APPENDIX
+	\vfill
+\end{center}
+\addcontentsline{toc}{section}{APPENDIX}
+
+\newpage
+\section*{\large{Appendix: Additional Figures and Tables}}
+
+%Biological Materials Table	
+\begin{table}[H]
+	\centering
+	
+	\label{biomat}
+		\caption{Biological materials used in fluorescent nodule experiments.}
+	\begin{tabular}{@{}cccc@{}}
+		\toprule
+		\textbf{Material} & \textbf{Species/Type} & \textbf{Variety} & \textbf{Source} \\ \midrule
+		Plant             & \textit{Medicago truncatula}   & A17              & Maren Friesen   \\
+		Bacteria          & \textit{Ensifer meliloti}      & 1021             & Cheng \& Walker \\
+		Bacteria          & \textit{Ensifer meliloti}      & 1021:pHC60       & Cheng \& Walker \\
+		Bacteria          & \textit{Ensifer medicae}       & WSM419           & Maren Friesen   \\
+		Bacteria          & \textit{Ensifer medicae}       & PEA\_014\_4\_YFP & Maren Friesen   \\
+		Bacteria          & \textit{Ensifer medicae}       & RTM\_254\_2\_GFP & Maren Friesen   \\
+		Plasmid           & pCH60                 & GFP              & Cheng \& Walker \\
+		Plasmid           & pCH60                 & YFP              & Cheng \& Walker \\
+		Plasmid           & pCH60                 & mCherry          & Cheng \& Walker \\ \bottomrule
+	\end{tabular}
+
+\end{table}
+
+%Competitiveness is not related to frequency dependence  and 
+
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNCvsK.png}
+		\caption{The relative competitiveness (C) of two rhizobia strains
+			does not affect the degree of frequency dependent nodulation (k).	
+		}
+		\label{fig:CvsK}
+	\end{figure}
+	
+%Balancing nodulation by publication
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNKbyPub.png}
+		\caption{28 of 30 publications contain evidence of frequency dependent nodulation.	
+		}
+		\label{fig:KbyPub}
+	\end{figure}
+	
+%Balancing nodulation by plant genus
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNKbyGenus.png}
+		\caption{All 12 genera of legumes studied demonstrate frequency dependent nodulation.	
+		}
+		\label{fig:KbyGenus}
+	\end{figure}
+	
+%Regression Methods Compared
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNregmethods.png}
+		\caption{The regression method used to estimate slopes does not substantially alter the results. We calculated k-values with ordinary least squares, major axis regression, and standardized major axis regression for these analyses. The regression method had trivial effects on our results, with mean k-value differing by -0.013,  -0.0082, and -0.0216 between the three methods. All correlations among the k-values gleaned from these regression techniques were greater than 0.99.  We therefore chose to use ordinary least squares for all analyses to include the greatest number of experiments.
+		}
+		\label{fig:regmethods}
+	\end{figure}
+	
+%Funnel plot for pub bias
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNfunnelplot.png}
+		\caption{Plot assessing publication bias in frequency dependent nodulation data set. Funnel plots are used to visually assess bias in meta-analysis data sets. Since this plot appears to be symmetrical, we find no reason to suspect bias in our data.}
+		\label{fig:funnel}
+	\end{figure}
+
+%Power analysis
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{BNpoweranalysis.png}
+		\caption{Power analysis for detection of an effect of a binary co-variate on frequency dependent nodulation. My power analysis shows that only large effects are likely to be detected with our meta-analysis. For my sample size of 130, the effect would have to be about .25 slope units to have an 85 percent chance of detection. Therefore small to moderate effects are not adequately tested for with this analysis.}
+		\label{fig:power}
+	\end{figure}
+
+
+%plot PCA 1
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{GNPCA1}
+		\caption{First principle component analysis plot for fluorescence profiles of \textit{Medicago truncatula} A17 root nodules inoculated with \textit{Ensifer meliloti} 1021.}
+		\label{fig:PCA1}
+	\end{figure}
+		
+%plot PCA 2
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{GNPCA2}
+		\caption{Second principle component analysis plot for fluorescence profiles of \textit{Medicago truncatula} A17 root nodules inoculated with \textit{Ensifer meliloti} 1021.}
+		\label{fig:PCA2}
+	\end{figure}
+	
+%glamour shot of nodules
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=14cm]{GN_10-31-43_glamorshot_crop_pub.png}
+		\caption{\textit{Medicago truncatula} A17 root nodules co-inoculated with \textit{Ensifer meliloti} 1021:GFP and :YFP. False color fluorescence image. Red nodules=YFP, green nodules=GFP. A) Non-fluorescent control B) YFP C) GFP}
+		\label{fig:xmas}
+	\end{figure}
+	
+%Balancing nodulation models table w/ mathematical models???
+\end{doublespace}
+
+%For ProQuest scripts are uploaded separately so that appendix has been deleted from this version.
+\newpage
+\section*{} %Cover Sheet for References
+\begin{center}
+\vfill
+REFERENCES
+\vfill
+\end{center}
+\addcontentsline{toc}{section}{REFERENCES} %Capitalizes REFERENCES
+
+\newpage
+
+\renewcommand\refname{\centering\large{REFERENCES\linebreak[2]}} %Capitalizes REFERENCES in section
+
+\bibliography{library_fixed,ElliesRefs}
+\bibliographystyle{ieeetr}
+
+
+\end{document}
+
+
+
+
